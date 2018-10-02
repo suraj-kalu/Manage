@@ -25,6 +25,8 @@
     <string name="delete_item">Delete</string>
     <string name="delete_message">Do you want to delete this item?</string>
     <string name="keep_updating_message">Do you want to keep updating?</string>
+    <string name="empty_shelf">The shelf is currently empty.</string>
+    <string name="empty_shelf_description">Empty shelf image</string>
 
     <string-array name="quantity_description_label">
         <item>Kg</item>

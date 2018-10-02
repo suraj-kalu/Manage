@@ -1,7 +1,6 @@
 package com.examples.surajratnakalu.management;
 
 import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,23 +10,16 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.SwipeDismissBehavior;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private  long getId = -1;
     private boolean showMenu = false;
     private static final String TAG = "MainActivity";
+    private View mEmptyTextView;
 
 
     @Override
@@ -56,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         mToolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
+        mEmptyTextView = findViewById(R.id.empty_text_view);
         fab = findViewById(R.id.add_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         mListView = findViewById(R.id.list_view);
+        mListView.setEmptyView(mEmptyTextView);
 
         mCursorAdapter = new ItemDisplayCursorAdapter(this, null, 0);
         mListView.setAdapter(mCursorAdapter);
