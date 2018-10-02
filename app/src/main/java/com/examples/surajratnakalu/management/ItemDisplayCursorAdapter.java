@@ -2,7 +2,6 @@ package com.examples.surajratnakalu.management;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,16 +48,14 @@ public class ItemDisplayCursorAdapter extends CursorAdapter {
         mDisplayQuantityDescription.setText(rateDescription);
         switch (rateDescription) {
             case "kg":
-                mDisplayRateDescription.setText("Pet Kg");
+                mDisplayRateDescription.setText(R.string.per_kg);
                 break;
             case "Dozen(s)":
-                mDisplayRateDescription.setText("Pet Dozen");
+                mDisplayRateDescription.setText(R.string.per_dozen);
                 break;
             case "Cartoon(s)":
-                mDisplayRateDescription.setText("Per Cartoon");
+                mDisplayRateDescription.setText(R.string.per_cartoon);
                 break;
         }
-
-
     }
 }

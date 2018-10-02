@@ -20,7 +20,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -31,16 +30,14 @@ import com.examples.surajratnakalu.management.Data.ItemsContract;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    //    private RecyclerView mRecyclerView;
     private Toolbar mToolbar;
     private ItemDisplayCursorAdapter mCursorAdapter;
     private FloatingActionButton fab;
     private SwipeMenuListView mListView;
-    private  long getId = -1;
+    private long getId = -1;
     private boolean showMenu = false;
     private static final String TAG = "MainActivity";
     private View mEmptyTextView;
-
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -49,8 +46,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         mToolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
+
         mEmptyTextView = findViewById(R.id.empty_text_view);
         fab = findViewById(R.id.add_fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,20 +65,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mListView.setAdapter(mCursorAdapter);
         getSupportLoaderManager().initLoader(0, null, this);
 
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Log.d(TAG, "onItemClick: item clicked");
-//                Intent intent = new Intent(MainActivity.this, AddUpdateActivity.class);
-//                Uri contentUri = ContentUris.withAppendedId(ItemsContract.ItemsEntry.CONTENT_URI, id);
-//                intent.setData(contentUri);
-//                startActivity(intent);
-//            }
-//        });
         SwipeMenuCreator swipeMenuCreator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {
-
                 SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
                 editItem.setIcon(R.drawable.baseline_edit_24);
                 editItem.setWidth(300);
@@ -89,11 +77,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 deleteItem.setIcon(R.drawable.baseline_delete_24);
                 deleteItem.setBackground(new ColorDrawable(Color.rgb(226, 63, 85)));
-
                 deleteItem.setWidth(300);
                 menu.addMenuItem(deleteItem);
             }
-
         };
 
         mListView.setMenuCreator(swipeMenuCreator);
@@ -110,10 +96,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                if(showMenu) {
+                if (showMenu) {
                     switch (index) {
                         case 0:
-
                             Log.d(TAG, "onItemClick: item clicked");
                             Intent intent = new Intent(MainActivity.this, AddUpdateActivity.class);
                             Uri contentUri = ContentUris.withAppendedId(ItemsContract.ItemsEntry.CONTENT_URI, getId);
@@ -121,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                             startActivity(intent);
                             break;
                         case 1:
-
                             Log.d(TAG, "onMenuItemClick: deleted");
                             final AlertDialog.Builder deleteDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                             deleteDialogBuilder.setTitle(R.string.delete_item);
@@ -139,17 +123,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                             deleteDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if(dialog != null){
+                                    if (dialog != null) {
                                         dialog.dismiss();
                                     }
                                 }
                             });
                             AlertDialog deleteDialog = deleteDialogBuilder.create();
                             deleteDialog.show();
-
                             break;
                     }
-                }else{
+                } else {
                     Toast.makeText(MainActivity.this, "Please select the item list to register for taking action", Toast.LENGTH_SHORT).show();
                 }
                 showMenu = false;
@@ -157,14 +140,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-            mListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
-
+        mListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @NonNull

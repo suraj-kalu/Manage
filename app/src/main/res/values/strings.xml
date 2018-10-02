@@ -27,6 +27,9 @@
     <string name="keep_updating_message">Do you want to keep updating?</string>
     <string name="empty_shelf">The shelf is currently empty.</string>
     <string name="empty_shelf_description">Empty shelf image</string>
+    <string name="per_kg">per Kg</string>
+    <string name="per_dozen">per Dozen</string>
+    <string name="per_cartoon">per Cartoon</string>
 
     <string-array name="quantity_description_label">
         <item>Kg</item>

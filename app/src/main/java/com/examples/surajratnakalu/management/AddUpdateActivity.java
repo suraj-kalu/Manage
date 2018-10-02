@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -28,13 +27,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.examples.surajratnakalu.management.Data.ItemsContract;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class AddUpdateActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -50,8 +47,6 @@ public class AddUpdateActivity extends AppCompatActivity implements LoaderManage
     private double rate = -1;
     private double quantity = -1;
     String date_date = "";
-
-
     private Spinner mSpinner;
     private TextView mTextView;
     private String quantity_description;
@@ -72,7 +67,6 @@ public class AddUpdateActivity extends AppCompatActivity implements LoaderManage
         mAddUpdateQuantity = findViewById(R.id.add_update_item_quantity);
         mAddUpdateRate = findViewById(R.id.add_update_item_rate);
         mAddUpdateButton = findViewById(R.id.add_update_button);
-
         mCalendarView = findViewById(R.id.add_update_item_date);
         mSpinner = findViewById(R.id.spinner_quantity_description);
         mTextView = findViewById(R.id.textView_rate_description);
@@ -94,12 +88,11 @@ public class AddUpdateActivity extends AppCompatActivity implements LoaderManage
                 int date_day = dayOfMonth;
                 int date_month = month + 1;
                 int date_year = year;
-                Log.i(TAG, "onClick: " + date_date);
+//                Log.i(TAG, "onClick: " + date_date);
                 date_date = date_day + "/" + date_month + "/" + date_year;
-                Log.i(TAG, "onClick: " + date_date);
+//                Log.i(TAG, "onClick: " + date_date);
             }
         });
-
 
         mAddUpdateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,15 +107,14 @@ public class AddUpdateActivity extends AppCompatActivity implements LoaderManage
                 quantity_description = (String) parent.getItemAtPosition(position);
                 switch (quantity_description) {
                     case "Kg":
-                        mTextView.setText("per Kg");
+                        mTextView.setText(R.string.per_kg);
                         break;
                     case "Dozen(s)":
-                        mTextView.setText("per dozen");
+                        mTextView.setText(R.string.per_dozen);
                         break;
                     case "Cartoon(s)":
-                        mTextView.setText("pet Cartoon");
+                        mTextView.setText(R.string.per_cartoon);
                         break;
-
                 }
             }
 
@@ -157,15 +149,14 @@ public class AddUpdateActivity extends AppCompatActivity implements LoaderManage
             String selectedItemPosition = cursor.getString(cursor.getColumnIndex(ItemsContract.ItemsEntry.ITEM_QUANTITY_DESCRIPTION));
             if (selectedItemPosition.equals("kg")) {
                 mSpinner.setSelection(1);
-                mTextView.setText("pet Kg");
+                mTextView.setText(R.string.per_kg);
             } else if (selectedItemPosition.equals("Dozen(s)")) {
                 mSpinner.setSelection(2);
-                mTextView.setText("per Dozen");
+                mTextView.setText(R.string.per_dozen);
             } else if (selectedItemPosition.equals("Cartoon(s)")) {
                 mSpinner.setSelection(3);
-                mTextView.setText("per Cartoon");
+                mTextView.setText(R.string.per_cartoon);
             }
-
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyy");
             try {
@@ -180,7 +171,6 @@ public class AddUpdateActivity extends AppCompatActivity implements LoaderManage
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-
         mAddUpdateItemName.setText("");
         mAddUpdateRate.setText("");
         mAddUpdateQuantity.setText("");
@@ -194,7 +184,6 @@ public class AddUpdateActivity extends AppCompatActivity implements LoaderManage
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
             date_date = simpleDateFormat.format(mCalendarView.getDate());
             Log.i(TAG, "saveOrUpdateList: " + date_date);
-
         }
 
         if (!TextUtils.isEmpty(name) && (quantity > 0) && (rate > 0)) {
@@ -228,7 +217,6 @@ public class AddUpdateActivity extends AppCompatActivity implements LoaderManage
 
                 AlertDialog saveDialog = saveDialogBuilder.create();
                 saveDialog.show();
-
             } else {
                 final String selection = ItemsContract.ItemsEntry.ID + "=?";
                 final String[] selectionArgs = new String[]{
@@ -255,11 +243,9 @@ public class AddUpdateActivity extends AppCompatActivity implements LoaderManage
 
                 AlertDialog updateDialog = updateDialogBuilder.create();
                 updateDialog.show();
-
             }
-
         } else {
-            Toast.makeText(AddUpdateActivity.this, "All feilds need to be filled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddUpdateActivity.this, "All fields need to be filled", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -278,12 +264,10 @@ public class AddUpdateActivity extends AppCompatActivity implements LoaderManage
                 return true;
         }
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override
     public void onBackPressed() {
-
         AlertDialog.Builder backDialogBuilder = new AlertDialog.Builder(this);
         backDialogBuilder.setTitle(R.string.update_item_title);
         backDialogBuilder.setMessage(R.string.keep_updating_message);

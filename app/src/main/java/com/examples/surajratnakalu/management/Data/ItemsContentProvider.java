@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-
 public class ItemsContentProvider extends ContentProvider {
 
     private ItemsDbHelper mDbHelper;
