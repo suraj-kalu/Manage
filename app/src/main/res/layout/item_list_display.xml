@@ -145,7 +145,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="Kg"
-        android:textAppearance="@style/TextAppearance.AppCompat.Tooltip"
         app:layout_constraintBottom_toTopOf="@+id/display_quantity"
         app:layout_constraintStart_toEndOf="@+id/display_quantity"
         app:layout_constraintTop_toBottomOf="@+id/display_quantity" />

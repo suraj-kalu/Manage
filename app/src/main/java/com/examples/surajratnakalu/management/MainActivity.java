@@ -16,8 +16,10 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -28,7 +30,15 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.examples.surajratnakalu.management.Data.ItemsContract;
 
+import static com.examples.surajratnakalu.management.R.drawable.baseline_delete_24;
+import static com.examples.surajratnakalu.management.R.drawable.baseline_edit_24;
+
+
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     private Toolbar mToolbar;
     private ItemDisplayCursorAdapter mCursorAdapter;
@@ -69,15 +79,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void create(SwipeMenu menu) {
                 SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
-                editItem.setIcon(R.drawable.baseline_edit_24);
-                editItem.setWidth(300);
-                editItem.setBackground(new ColorDrawable(Color.rgb(104, 153, 232)));
+                editItem.setIcon(R.drawable.baseline_edit_black_24);
+                editItem.setTitleColor(Color.WHITE);
+                editItem.setWidth(dp2px(90));
+//                editItem.setBackground(new ColorDrawable(Color.rgb(104, 153, 232)));
                 menu.addMenuItem(editItem);
 
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
-                deleteItem.setIcon(R.drawable.baseline_delete_24);
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(226, 63, 85)));
-                deleteItem.setWidth(300);
+                deleteItem.setIcon(R.drawable.baseline_delete_black_24);
+                editItem.setTitleColor(Color.WHITE);
+//                deleteItem.setBackground(new ColorDrawable(Color.rgb(226, 63, 85)));
+                deleteItem.setWidth(dp2px(90));
                 menu.addMenuItem(deleteItem);
             }
         };
@@ -169,5 +181,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         mCursorAdapter.swapCursor(null);
+    }
+
+    private int dp2px(int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                getResources().getDisplayMetrics());
     }
 }
