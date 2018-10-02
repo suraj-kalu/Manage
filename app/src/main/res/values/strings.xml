@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Management</string>
+    <string name="app_name">Manage</string>
     <string name="item_name_hint">Name of the product</string>
     <string name="quantity_hint">Quantity</string>
     <string name="rate_hint">Rate</string>
