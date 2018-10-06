@@ -44,7 +44,7 @@ public class ItemDisplayCursorAdapter extends CursorAdapter {
         String rateDescription = cursor.getString(cursor.getColumnIndex(ItemsContract.ItemsEntry.ITEM_QUANTITY_DESCRIPTION));
         mDisplayRate.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex(ItemsContract.ItemsEntry.ITEM_RATE))));
         mDisplayDate.setText(cursor.getString(cursor.getColumnIndex(ItemsContract.ItemsEntry.ITEM_DATE)));
-        mDisplayCost.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex(ItemsContract.ItemsEntry.ITEM_TOTAL_COST))));
+        mDisplayCost.setText(String.format("%.2f",cursor.getDouble(cursor.getColumnIndex(ItemsContract.ItemsEntry.ITEM_TOTAL_COST))));
         mDisplayQuantityDescription.setText(rateDescription);
         switch (rateDescription) {
             case "kg":
